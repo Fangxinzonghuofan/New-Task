@@ -1,15 +1,17 @@
-$(document).on("pagecreate","#pageone",function(){
-  $('#submitButton').on("click", function(){
-    submitText();
-  });            
-});            
+Backendless.initApp("A93BFE76-ECC2-76FD-FF8C-3FB305FAC400","DAF76200-4BAA-5758-FFA0-D60D4F883900");
 
+$(document).on("pageshow","#todopage", onPageShow);
 
-function submitText() {
-	var text = $('#textinput').val();
-	alert(text);
+function onPageShow() {
+	console.log("page shown");
+} 
+
+Backendless.Data.of("TASKS").find().then(processResults).catch(error);
+function processResults(tasks) {
+   //display the first task in an array of tasks. 
+alert(tasks[0].Task)
 }
 
-function storeValue(key, value) {
-	//add some code to store the key-value pair in persistant storage 
+function error(err) {
+    alert(err);
 }
